@@ -93,9 +93,15 @@ public abstract class AbstractXmlApplicationContext extends org.springframework.
 
 		// Allow a subclass to provide custom initialization of the reader,
 		// then proceed with actually loading the bean definitions.
+		// 委托 AbstractXmlApplicationContext#initBeanDefinitionReader方法设置验证XML模式为true
 		initBeanDefinitionReader(beanDefinitionReader);
 
 		//主要看这个方法  重要程度 5
+		/**
+		 * 这里将解析过程委托给
+		 * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader#loadBeanDefinitions
+		 *
+		 */
 		loadBeanDefinitions(beanDefinitionReader);
 	}
 

@@ -129,17 +129,28 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 			closeBeanFactory();
 		}
 		try {
-			//创建DefaultListableBeanFactory
 
-			//BeanFactory 实例工厂
+			/*
+				TODO BeanFactory 实例工厂
+				 创建Bean工厂
+				 @see org.springframework.beans.factory.support.DefaultListableBeanFactory#DefaultListableBeanFactory(@Nullable BeanFactory parentBeanFactory)
+			 */
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
+			//设置序列化id 反序列化时候会用到
 			beanFactory.setSerializationId(getId());
 
-			//设置是否可以循环依赖 allowCircularReferences
-			//是否允许使用相同名称重新注册不同的bean实现.
+			//设置是否可以循环依赖 allowCircularReferences 默认true
+			//是否允许使用相同名称重新注册不同的bean实现.allowBeanDefinitionOverriding 默认 true
 			customizeBeanFactory(beanFactory);
 
-			//解析xml，并把xml中的标签封装成BeanDefinition对象
+			//
+			/**
+			   解析 xml，并把 xml 中的标签封装成 BeanDefinition 对象
+			   @see org.springframework.context.support.AbstractXmlApplicationContext#loadBeanDefinitions
+			   过程描述
+			   1 先创建 XmlBeanDefinitionReader (beanFactory)实利 这里的beanFactory 指的是DefaultListableBeanFactory implement BeanDefinitionRegistry registry
+			   	 将 DefaultListableBeanFactory 传给 XmlBeanDefinitionReader 这里持有beanFactory的一个引用
+			 */
 			loadBeanDefinitions(beanFactory);
 			synchronized (this.beanFactoryMonitor) {
 				this.beanFactory = beanFactory;

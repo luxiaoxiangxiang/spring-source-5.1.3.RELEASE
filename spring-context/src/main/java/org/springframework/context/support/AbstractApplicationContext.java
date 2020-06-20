@@ -647,6 +647,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/**
 	 * Prepare this context for refreshing, setting its startup date and
 	 * active flag as well as performing any initialization of property sources.
+	 * @see org.springframework.core.env.ConfigurablePropertyResolver#setRequiredProperties
 	 */
 	protected void prepareRefresh() {
 		this.startupDate = System.currentTimeMillis();
@@ -663,10 +664,16 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Initialize any placeholder property sources in the context environment
+		// 在子类可以覆盖这个方法来实现添加必须的系统参数效验
+		// 留给子类覆盖的初始化配置的方法
 		initPropertySources();
 
 		// Validate that all properties marked as required are resolvable
-		// see ConfigurablePropertyResolver#setRequiredProperties
+		/* TODO
+		    @see org.springframework.core.env.ConfigurablePropertyResolver#setRequiredProperties
+		*/
+
+		// 验证需要的环境属性文件是否都已经放入环境中
 		getEnvironment().validateRequiredProperties();
 
 		// Allow for the collection of early ApplicationEvents,
@@ -690,7 +697,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @see #getBeanFactory()
 	 */
 	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
-		//核心方法，必须读，重要程度：5
+		/* 核心方法，必须读，重要程度：5
+		*
+		*
+		*
+		*/
 		refreshBeanFactory();
 		return getBeanFactory();
 	}

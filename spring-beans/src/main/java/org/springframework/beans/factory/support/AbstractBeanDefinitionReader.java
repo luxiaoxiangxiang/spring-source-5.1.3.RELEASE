@@ -185,7 +185,7 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 		Assert.notNull(resources, "Resource array must not be null");
 		int count = 0;
 		for (Resource resource : resources) {
-			//模板设计模式，调用到子类中的方法
+			//????????????????????械????
 			count += loadBeanDefinitions(resource);
 		}
 		return count;
@@ -221,11 +221,11 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 		if (resourceLoader instanceof ResourcePatternResolver) {
 			// Resource pattern matching available.
 			try {
-				//把字符串类型的xml文件路径，形如：classpath*:user/**/*-context.xml,转换成Resource对象类型，其实就是用流
-				//的方式加载配置文件，然后封装成Resource对象，不重要，可以不看
+				//????????????xml???路???????纾篶lasspath*:user/**/*-context.xml,?????Resource????????????????????
+				//????????????????????????Resource?????????????????
 				Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);
 
-				//主要看这个方法 ** 重要程度 5
+				//???????????? ** ?????? 5
 				int count = loadBeanDefinitions(resources);
 				if (actualResources != null) {
 					Collections.addAll(actualResources, resources);
@@ -258,7 +258,7 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 	public int loadBeanDefinitions(String... locations) throws BeanDefinitionStoreException {
 		Assert.notNull(locations, "Location array must not be null");
 		int count = 0;
-		//配置文件有多个，加载多个配置文件
+		//????????卸?????????????????
 		for (String location : locations) {
 			count += loadBeanDefinitions(location);
 		}
