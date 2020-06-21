@@ -81,13 +81,25 @@ public abstract class AbstractXmlApplicationContext extends org.springframework.
 	protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throws BeansException, IOException {
 		// Create a new XmlBeanDefinitionReader for the given BeanFactory.
 		//创建xml的解析器，这里是一个委托模式
+		/**
+		 * 	XmlBeanDefinitionReader 持有 DefaultListableBeanFactory 的引用，并判断是否实现了ResourceLoader 接口
+		 * 	如果你没有则直接创建一个 new PathMatchingResourcePatternResolver(); 将引用赋值给 resourceLoader
+		 * 		@see org.springframework.core.io.support.PathMatchingResourcePatternResolver#PathMatchingResourcePatternResolver()
+		 * 	再判断是否实现了 org.springframework.core.env.EnvironmentCapable 接口 实现了就将 beanFactory的getEnvironment() 的值赋值给 this.enviroment
+		 * 	否则创建一个
+		 * 		@see org.springframework.core.env.StandardEnvironment#StandardEnvironment()
+		 * this = XmlBeanDefinitionReader
+		 * this.resourceLoader = new PathMatchingResourcePatternResolver();
+		 * this.enviroment = new StandardEnvironment();
+		 */
 		XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
 
 		// Configure the bean definition reader with this context's
 		// resource loading environment.
 		beanDefinitionReader.setEnvironment(this.getEnvironment());
 
-		//这里传一个this进去，因为ApplicationContext是实现了ResourceLoader接口的
+		// 这里传一个this进去，因为ApplicationContext是实现了ResourceLoader接口的
+		// 将上面创建的 new PathMatchingResourcePatternResolver(); 覆盖掉。
 		beanDefinitionReader.setResourceLoader(this);
 		beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
 
@@ -100,7 +112,8 @@ public abstract class AbstractXmlApplicationContext extends org.springframework.
 		/**
 		 * 这里将解析过程委托给
 		 * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader#loadBeanDefinitions
-		 *
+		 * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader#loadBeanDefinitions(org.springframework.core.io.support.EncodedResource)
+		 * 这里做了一些预处理工作，
 		 */
 		loadBeanDefinitions(beanDefinitionReader);
 	}

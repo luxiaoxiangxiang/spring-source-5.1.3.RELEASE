@@ -185,7 +185,7 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 		Assert.notNull(resources, "Resource array must not be null");
 		int count = 0;
 		for (Resource resource : resources) {
-			//????????????????????е????
+			//循环遍历多个resource文件
 			count += loadBeanDefinitions(resource);
 		}
 		return count;
@@ -221,11 +221,11 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 		if (resourceLoader instanceof ResourcePatternResolver) {
 			// Resource pattern matching available.
 			try {
-				//????????????xml???·???????磺classpath*:user/**/*-context.xml,?????Resource????????????????????
-				//????????????????????????Resource?????????????????
+				// 对location进行一系列判断首先会判断有没有 "classpath*:" 然后判断 "war:" 再判断 "classpath:" 如果都没有默认从 classpath 下找文件
+				// 最终找到	创建了一个 ClassPathContextResource(String path, @Nullable ClassLoader classLoader) 来读取文件
 				Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);
 
-				//???????????? ** ?????? 5
+				// 这个方法是加载主流程，解析并注册bean标签 还有自定义标签 非常重要
 				int count = loadBeanDefinitions(resources);
 				if (actualResources != null) {
 					Collections.addAll(actualResources, resources);
@@ -258,7 +258,7 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 	public int loadBeanDefinitions(String... locations) throws BeanDefinitionStoreException {
 		Assert.notNull(locations, "Location array must not be null");
 		int count = 0;
-		//????????ж?????????????????
+		//遍历所有的文件 然后分别进行加载
 		for (String location : locations) {
 			count += loadBeanDefinitions(location);
 		}
