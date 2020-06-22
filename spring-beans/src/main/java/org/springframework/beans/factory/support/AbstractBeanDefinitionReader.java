@@ -226,6 +226,21 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 				Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);
 
 				// 这个方法是加载主流程，解析并注册bean标签 还有自定义标签 非常重要
+				/**
+				 * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader#loadBeanDefinitions(org.springframework.core.io.support.EncodedResource)
+				 * 此处委托 XmlBeanDefinitionReader#loadBeanDefinitions(org.springframework.core.io.support.EncodedResource) 方法 加载
+				 * @see org.springframework.beans.factory.xml.DefaultDocumentLoader#loadDocument(org.xml.sax.InputSource, org.xml.sax.EntityResolver, org.xml.sax.ErrorHandler, int, boolean)
+				 *      先用 DefaultDocumentLoader#loadDocument 方法验证xml文件，默认为xsd解析模式
+				 *      然后将文件读取为 org.w3c.dom.Document 对象 传给专职解析类
+				 *      @see org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader#registerBeanDefinitions(org.w3c.dom.Document, org.springframework.beans.factory.xml.XmlReaderContext)
+				 *      创建
+				 *      @see org.springframework.beans.factory.xml.BeanDefinitionParserDelegate#BeanDefinitionParserDelegate(org.springframework.beans.factory.xml.XmlReaderContext) beanDefinition 委托解析器
+				 *      默认标签解析
+				 *      @see org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader#parseDefaultElement(org.w3c.dom.Element, org.springframework.beans.factory.xml.BeanDefinitionParserDelegate)
+				 *      自定义标签解析
+				 *      @see org.springframework.beans.factory.xml.BeanDefinitionParserDelegate#parseCustomElement(org.w3c.dom.Element, org.springframework.beans.factory.config.BeanDefinition)
+				 *
+				 */
 				int count = loadBeanDefinitions(resources);
 				if (actualResources != null) {
 					Collections.addAll(actualResources, resources);
