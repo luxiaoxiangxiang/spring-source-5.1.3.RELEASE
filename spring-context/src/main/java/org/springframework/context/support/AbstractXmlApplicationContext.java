@@ -111,7 +111,6 @@ public abstract class AbstractXmlApplicationContext extends org.springframework.
 		//主要看这个方法  重要程度 5
 		/**
 		 * 这里将解析过程委托给
-		 * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader#loadBeanDefinitions
 		 * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader#loadBeanDefinitions(org.springframework.core.io.support.EncodedResource)
 		 * 这里做了一些预处理工作，
 		 */
