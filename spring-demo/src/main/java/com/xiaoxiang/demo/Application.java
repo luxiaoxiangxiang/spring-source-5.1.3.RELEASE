@@ -10,6 +10,6 @@ public class Application {
 	public static void main(String[] args) {
 		MyXMLApplicationContext context = new MyXMLApplicationContext("spring.xml");
 		Student student = (Student)context.getBean("student");
-		System.out.println(student);
+		System.out.println(student.toString());
 	}
 }
