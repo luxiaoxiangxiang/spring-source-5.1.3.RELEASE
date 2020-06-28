@@ -14,13 +14,13 @@
     http://www.springframework.org/schema/aop/spring-aop.xsd
 	">
 	<context:component-scan base-package="com.xiaoxiang.demo"/>
-    <bean id="student" class="com.xiaoxiang.demo.bean.Student">
+<!--    <bean id="student" class="com.xiaoxiang.demo.bean.Student">
         <property name="password" value="123"/>
 		<property name="date">
 			<value>2013-03-15</value>
 		</property>
-    </bean>
-	<aop:aspectj-autoproxy />
+    </bean>-->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
 		<!--<property name="customEditors">
 			<map>
@@ -37,5 +37,4 @@
 	<bean id="testListener" class="com.xiaoxiang.demo.event.TestListener"></bean>
 
 -->
-
 </beans>

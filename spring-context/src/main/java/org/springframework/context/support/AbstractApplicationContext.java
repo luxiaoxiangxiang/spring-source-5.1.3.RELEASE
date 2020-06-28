@@ -529,7 +529,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	@Override
 	public void refresh() throws BeansException, IllegalStateException {
 		synchronized (this.startupShutdownMonitor) {
-			//为容器初始化做准备，重要程度：0
+			// 为容器初始化做准备，里面的方法可以给子类实现
 			// Prepare this context for refreshing.
 			prepareRefresh();
 
@@ -540,7 +540,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			  1、创建BeanFactory对象
 			* 2、xml解析
 			* 	传统标签解析：bean、import等
-			* 	自定义标签解析 如：<context:component-scan base-package="com.xiangxue.jack"/>
+			* 	自定义标签解析 如：<context:component-scan base-package="包路径"/>
 			* 	自定义标签解析流程：
 			* 		a、根据当前解析标签的头信息找到对应的namespaceUri
 			* 		b、加载spring所以jar中的spring.handlers文件。并建立映射关系

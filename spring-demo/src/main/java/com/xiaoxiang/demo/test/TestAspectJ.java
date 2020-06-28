@@ -1,7 +1,6 @@
 package com.xiaoxiang.demo.test;
 
 import com.xiaoxiang.demo.bean.AspectJTestBean;
-import com.xiaoxiang.demo.event.TestEvent;
 import com.xiaoxiang.demo.init.MyXMLApplicationContext;
 
 public class TestAspectJ {

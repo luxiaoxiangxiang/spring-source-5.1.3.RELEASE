@@ -11,7 +11,7 @@ public class TestAspect {
 
 	@Pointcut("execution(* *.test(..))")
 	public void test(){
-
+		System.out.println("nihao");
 	}
 
 	@Before("test()")

@@ -1,15 +1,18 @@
 package com.xiaoxiang.demo.bean;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+@Service
 public class Student {
 
-	private String username = "luxiao";
+	@Value("luxiao")
+	private String username ;
 
+	@Value("2013-03-15")
 	private Date date ;
 
 	public Date getDate() {
@@ -20,6 +23,7 @@ public class Student {
 		this.date = date;
 	}
 
+	@Value("123s")
 	private String password;
 
 	public String getUsername() {
