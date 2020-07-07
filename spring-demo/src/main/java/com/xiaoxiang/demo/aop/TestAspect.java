@@ -29,10 +29,23 @@ public class TestAspect {
 		Object o = null;
 		try{
 			o = joinPoint.proceed();
+			return o;
 		}catch(Throwable a){
 			a.printStackTrace();
+		}finally {
+			System.out.println("zhixing");
+			System.out.println("after1");
 		}
-		System.out.println("after1");
+
 		return o;
+	}
+
+
+	public static void main(String[] args) {
+		try{
+
+		}finally {
+
+		}
 	}
 }
