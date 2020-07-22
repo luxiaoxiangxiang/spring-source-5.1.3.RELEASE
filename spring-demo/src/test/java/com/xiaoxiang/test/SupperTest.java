@@ -13,7 +13,7 @@ public class SupperTest {
 
 	@Before
 	public void before(){
-		applicationContext = new MyXMLApplicationContext("classpath:spring.xml");
+		applicationContext = new MyXMLApplicationContext("classpath:spring-demo.xml");
 	}
 
 	@Test

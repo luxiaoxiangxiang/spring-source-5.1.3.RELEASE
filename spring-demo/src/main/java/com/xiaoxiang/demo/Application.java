@@ -8,7 +8,7 @@ import com.xiaoxiang.demo.init.MyXMLApplicationContext;
  */
 public class Application {
 	public static void main(String[] args) {
-		MyXMLApplicationContext context = new MyXMLApplicationContext("spring.xml");
+		MyXMLApplicationContext context = new MyXMLApplicationContext("spring-demo.xml");
 		Student student = (Student)context.getBean("student");
 		System.out.println(student.toString());
 	}
